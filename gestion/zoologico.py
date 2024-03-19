@@ -1,4 +1,4 @@
-class Zoologico:
+class Zoologico():
     def __init__(self, nombre, ubicacion):
         self._nombre = nombre
         self._ubicacion = ubicacion
@@ -8,15 +8,14 @@ class Zoologico:
         self._zonas.append(zona)
 
     def cantidadTotalAnimales(self):
-        contador = 0
+        cant = 0
         for zona in self._zonas:
-            contador += zona.cantidadAnimales()
-
-        return contador
-
+            cant += zona.cantidadAnimales()
+        return cant
+    
     def getNombre(self):
         return self._nombre
-
+    
     def setNombre(self, nombre):
         self._nombre = nombre
 

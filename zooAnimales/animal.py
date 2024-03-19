@@ -1,71 +1,62 @@
-class Animal:
+import zooAnimales
+class Animal():
     _totalAnimales = 0
-    def __init__(self, nombre, edad, habitat, genero, zona = None ):
+
+    def __init__(self, nombre, edad, habitat, genero):
         self._nombre = nombre
         self._edad = edad
         self._habitat = habitat
         self._genero = genero
-        self._zona = zona
+        self._zona = None
+        Animal._totalAnimales += 1
 
-    def movimiento():
-        return "dezplazarse"
+    def movimiento(self):
+        return "desplazarse"
     
-    def totalPorTipo():
-        from zooAnimales.mamifero import Mamifero
-        cantMa = Mamifero.cantidadMamiferos()
-        from zooAnimales.ave import Ave
-        cantAv = Ave.cantidadAves()
-        from zooAnimales.reptil import Reptil
-        cantRe = Reptil.cantidadReptiles()
-        from zooAnimales.pez import Pez
-        cantPe = Pez.cantidadPeces()
-        from zooAnimales.anfibio import Anfibio
-        cantAn = Anfibio.cantidadAnfibios()
-        return f"Mamiferos : {cantMa}\nAves : {cantAv}\nReptiles : {cantRe}\nPeces : {cantPe}\nAnfibios : {cantAn}"
-
+    @classmethod
+    def totalPorTipo(cls):
+        return "Mamiferos : " + str(zooAnimales.mamifero.Mamifero.cantidadMamiferos()) + "\nAves : " + str(zooAnimales.ave.Ave.cantidadAves()) + "\nReptiles : " + str(zooAnimales.reptil.Reptil.cantidadReptiles()) + "\nPeces : " + str(zooAnimales.pez.Pez.cantidadPeces()) + "\nAnfibios : " + str(zooAnimales.anfibio.Anfibio.cantidadAnfibios())
+    
     def toString(self):
-        return self.__str__()
+        if self._zona == None:
+            return "Mi nombre es " + str(self._nombre) + ", tengo una edad de " + str(self._edad) + ", habito en " + str(self._habitat) + " y mi genero es " + str(self._genero)
+        else:
+            return "Mi nombre es " + str(self._nombre) + ", tengo una edad de " + str(self._edad) + ", habito en " + str(self._habitat) + " y mi genero es " + str(self._genero) + ", la zona en la que me ubico es " + str(self._zona) + ", en el " + str(self._zona.getZoo().getNombre())
 
-    def __str__(self):
-        string = f"Mi nombre es {self._nombre}, tengo una edad de {self._edad}, habito en {self._habitat} y mi genero es {self._genero}"
-        if self._zona != None:
-            string += f", la zona en la que me ubico es {self._zona}, en el {self._zoo}"
-        return string
-
-    def setNombre(self,nombre):
-        self._nombre = nombre
+    @classmethod    
+    def getTotalAnimales(cls):
+        return Animal._totalAnimales
+    
+    @classmethod
+    def setTotalAnimales(cls, total):
+        Animal._totalAnimales = total
 
     def getNombre(self):
         return self._nombre
     
-    def setEdad(self,edad):
-        self._edad = edad
+    def setNombre(self, nombre):
+        self._nombre = nombre
 
     def getEdad(self):
         return self._edad
     
-    def setHabitat(self,habitat):
-        self._habitat = habitat
+    def setEdad(self, edad):
+        self._edad = edad
 
     def getHabitat(self):
         return self._habitat
     
-    def setGenero(self,genero):
-        self._genero = genero
+    def setHabitat(self, habitat):
+        self._habitat = habitat
 
     def getGenero(self):
         return self._genero
     
-    def setZona(self,zona):
-        self.zona = zona
+    def setGenero(self, genero):
+        self._genero = genero
 
     def getZona(self):
         return self._zona
     
-    @classmethod
-    def setTotalAnimales(cls,totalAnimales):
-        cls._totalAnimales = totalAnimales
-        
-    @classmethod 
-    def getTotalAnimales(cls):
-        return cls._totalAnimales
+    def setZona(self, zona):
+        self._zona = zona
